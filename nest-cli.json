@@ -1,0 +1,39 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/",
+  "monorepo": true,
+  "root": "apps/chat-api",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/chat-api/tsconfig.app.json",
+    "plugins": [
+      {
+        "name": "@nestjs/swagger",
+        "options": {
+          "classValidatorShim": true,
+          "introspectComments": true
+        }
+      }
+    ]
+  },
+  "projects": {
+    "chat-api": {
+      "type": "chat-api",
+      "root": "apps/chat-api",
+      "entryFile": "main",
+      "sourceRoot": "apps/chat-api/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/chat-api/tsconfig.app.json"
+      }
+    },
+    "common": {
+      "type": "library",
+      "root": "libs/common",
+      "entryFile": "index",
+      "sourceRoot": "libs/common/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/common/tsconfig.lib.json"
+      }
+    }
+  }
+}
