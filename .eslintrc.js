@@ -84,6 +84,7 @@ module.exports = {
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/no-unsafe-argument': 'off',
     'const-case/uppercase': 'off',
+    '@typescript-eslint/unbound-method': 'off',
 
     'import/order': 'off',
     'import/no-extraneous-dependencies': [1, { devDependencies: true }],
@@ -98,6 +99,7 @@ module.exports = {
     'no-loops/no-loops': 2,
     'pii/no-phone-number': 'off',
     'pii/no-ip': 'off',
+    'pii/no-email': 'off',
 
     'unicorn/prefer-node-protocol': 0,
     'unicorn/prefer-module': 0,
