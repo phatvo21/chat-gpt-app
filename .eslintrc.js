@@ -83,6 +83,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 0,
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/no-unsafe-argument': 'off',
+    'const-case/uppercase': 'off',
 
     'import/order': 'off',
     'import/no-extraneous-dependencies': [1, { devDependencies: true }],

@@ -1,9 +1,9 @@
 import { Prop } from '@nestjs/mongoose';
-import { nanoid } from 'nanoid';
+import { ObjectId } from 'mongodb';
 
 export class BaseEntity {
-  @Prop({ type: String, default: () => nanoid() })
-  _id: string;
+  @Prop({ type: String, default: new ObjectId() })
+  _id: ObjectId;
 
   @Prop({ type: Date, default: new Date() })
   createdAt: Date;

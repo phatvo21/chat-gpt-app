@@ -3,7 +3,6 @@ import { Logger, NotFoundException } from '@nestjs/common';
 import { assign, isEmpty, map } from 'lodash';
 import { DeleteResult } from 'mongodb';
 import { FilterQuery, Model, QueryOptions } from 'mongoose';
-import { nanoid } from 'nanoid';
 
 import { BaseRepositoryInterface } from './base-repository.interface';
 
@@ -25,8 +24,7 @@ export abstract class BaseRepository<T extends BaseEntity> implements BaseReposi
     projection?: any | null,
     options?: (QueryOptions & { suppressNotFound?: boolean }) | null,
   ): Promise<Partial<T>> {
-    const calledId = nanoid();
-    this.logger.log({ calledId, id }, '.findById called');
+    this.logger.log({ id }, '.findById called');
     return this.findOne({ _id: id }, projection, options);
   }
 
@@ -41,23 +39,19 @@ export abstract class BaseRepository<T extends BaseEntity> implements BaseReposi
     const defaultOptions = { lean: true };
     const queryOptions = assign(defaultOptions, options || {});
 
-    const calledId = nanoid();
-    this.logger.log({ calledId, filter, projection, options }, '.findOne called');
+    this.logger.log({ filter, projection, options }, '.findOne called');
 
     let result;
 
     try {
       result = await this.baseModel.findOne(filter, queryProjection, queryOptions).exec();
-
       if (queryOptions.suppressNotFound) return result;
-
-      if (!result) throw new NotFoundException();
     } catch (error) {
-      this.logger.warn({ error, calledId, filter, projection, options }, '.findOne thrown error!');
+      this.logger.warn({ error, filter, projection, options }, '.findOne thrown error!');
       throw error;
     }
 
-    this.logger.log({ calledId, filter, projection, options }, '.findOne found result');
+    this.logger.log({ filter, projection, options }, '.findOne found result');
 
     return result;
   }
@@ -67,28 +61,25 @@ export abstract class BaseRepository<T extends BaseEntity> implements BaseReposi
     projection: any | null = { 'history.previousData': 0 },
     options?: (QueryOptions & { suppressNotFound?: boolean }) | null,
   ): Promise<Array<T> | null> {
-    const calledId = nanoid();
-    this.logger.log({ calledId, filter, projection, options }, '.findMany called');
+    this.logger.log({ filter, projection, options }, '.findMany called');
 
     const defaultOptions = { lean: true };
     const queryOptions = assign(defaultOptions, options || {});
 
     const result = await this.baseModel.find(filter, projection, queryOptions).exec();
 
-    this.logger.log({ calledId, ids: map(result, '_id') }, '.findById found result');
+    this.logger.log({ ids: map(result, '_id') }, '.findById found result');
     return result;
   }
 
   public async create(entity: Partial<T>): Promise<T> {
-    const calledId = nanoid();
-
     delete entity._id;
     delete entity.createdAt;
     delete entity.updatedAt;
 
-    this.logger.log({ calledId, entity }, '.create called');
+    this.logger.log({ entity }, '.create called');
     const newEntity = await new this.baseModel(entity).save();
-    this.logger.log({ calledId, id: newEntity.id }, '.create success');
+    this.logger.log({ id: newEntity.id }, '.create success');
     return this.parse(newEntity);
   }
 
@@ -97,21 +88,18 @@ export abstract class BaseRepository<T extends BaseEntity> implements BaseReposi
     projection?: any | null,
     options?: QueryOptions | null,
   ): Promise<Array<T> | null> {
-    const calledId = nanoid();
-    this.logger.log({ calledId, ids, projection, options }, '.findManyByIds called');
+    this.logger.log({ ids, projection, options }, '.findManyByIds called');
 
     return this.findMany({ _id: ids }, projection, options);
   }
 
   public updateById(id: string, entity: Partial<T>): Promise<T> {
-    const calledId = nanoid();
-    this.logger.log({ calledId, id, entity }, '.updateById called');
+    this.logger.log({ id, entity }, '.updateById called');
     return this.update({ _id: id }, entity);
   }
 
   public async update(filter: FilterQuery<T & any>, entity: Partial<T>): Promise<T> {
-    const calledId = nanoid();
-    this.logger.log({ calledId, filter, entity }, '.update called');
+    this.logger.log({ filter, entity }, '.update called');
 
     delete entity._id;
     delete entity.createdAt;
@@ -129,24 +117,22 @@ export abstract class BaseRepository<T extends BaseEntity> implements BaseReposi
 
       result = await this.baseModel.findOneAndUpdate(filter, updatePayload, { new: true }).lean().exec();
     } catch (error) {
-      this.logger.warn({ error, calledId }, '.update thrown error!');
+      this.logger.warn({ error }, '.update thrown error!');
       throw error;
     }
 
-    this.logger.log({ calledId }, '.updateById success');
+    this.logger.log('.updateById success');
     return result;
   }
 
   public async deleteById(id: string): Promise<DeleteResult> {
-    const calledId = nanoid();
-    this.logger.log({ calledId, id }, '.delete called');
+    this.logger.log({ id }, '.delete called');
 
     return this.baseModel.deleteOne({ _id: id });
   }
 
   public async deleteMany(filter: FilterQuery<T & any>): Promise<any> {
-    const calledId = nanoid();
-    this.logger.log({ calledId, filter }, '.deleteMany called');
+    this.logger.log({ filter }, '.deleteMany called');
 
     return this.baseModel.deleteMany(filter).exec();
   }
