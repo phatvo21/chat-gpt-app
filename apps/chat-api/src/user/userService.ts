@@ -10,7 +10,7 @@ export class UserService {
     private readonly userRepo: UserRepositoryInterface,
   ) {}
 
-  public setToken(data: { userId: string; token: string; expiresAt: Date }): Promise<any> {
+  public setToken(data: { userId: string; token: string; expiresAt: Date }): Promise<UserEntity> {
     const { userId, token, expiresAt } = data;
 
     const updatedToken: Token = {

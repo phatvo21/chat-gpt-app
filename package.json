@@ -33,6 +33,7 @@
     "*.ts": "eslint"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@fastify/static": "^6.10.2",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.4",

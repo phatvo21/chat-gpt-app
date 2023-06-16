@@ -1,3 +1,4 @@
+import { AuthOutputDto } from '@app/chat-api/auth/dtos/auth-output.dto';
 import { UserEntity } from '@app/chat-api/user/schema/user.schema';
 import { UserService } from '@app/chat-api/user/userService';
 import { Injectable } from '@nestjs/common';
@@ -18,7 +19,7 @@ export class AuthManager {
     return user;
   }
 
-  public async login(user: UserEntity, loginBody: any): Promise<{ refreshToken: string; token: string }> {
+  public async login(user: UserEntity, loginBody: any): Promise<AuthOutputDto> {
     if (!user) this.throwFailedLoginException();
 
     const refreshToken = await this.tokensManager.generateRefreshToken(user._id.toString(), loginBody?.rememberMe);

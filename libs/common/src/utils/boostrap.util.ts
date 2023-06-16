@@ -17,7 +17,6 @@ export const bootstrap = async (appModule, swaggerConfig: { title: string; serve
   const app = await NestFactory.create<NestFastifyApplication>(appModule, adapter);
 
   app.useLogger(app.get(Logger));
-  app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('api/v1', {
     exclude: [{ path: 'health', method: RequestMethod.GET }],
   });
@@ -33,6 +32,12 @@ export const bootstrap = async (appModule, swaggerConfig: { title: string; serve
     },
   });
 
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: false,
+    }),
+  );
   await app.register(fastifyCookie);
   await app.register(fastifyCsrf);
 
