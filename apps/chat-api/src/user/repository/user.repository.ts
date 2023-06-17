@@ -17,6 +17,6 @@ export class UserRepository extends BaseRepository<UserEntity> implements UserRe
   }
 
   public findOneByToken(token: string): Promise<any> {
-    return this.userModel.findOne({ '$token.token': token });
+    return this.userModel.findOne({ 'token.token': token }).exec();
   }
 }

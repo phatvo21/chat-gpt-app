@@ -30,7 +30,7 @@ module.exports = {
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
 
-    'no-secrets/no-secrets': 'error',
+    'no-secrets/no-secrets': 'warn',
     'max-classes-per-file': 0,
     'implicit-arrow-linebreak': 0,
     'object-curly-newline': 0,

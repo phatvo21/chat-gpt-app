@@ -23,7 +23,7 @@ export class ChatEntity extends BaseEntity {
   userId: ObjectId;
 
   @Type(() => Conversation)
-  @Prop({ type: Conversation, _id: false, hide: true })
+  @Prop({ type: Conversation, _id: false, default: [] })
   conversations?: Conversation[];
 }
 

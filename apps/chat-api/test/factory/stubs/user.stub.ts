@@ -4,10 +4,10 @@ import { ObjectId } from 'mongodb';
 
 /**
  * Function allows to generate the user's data that match to User entity
- * @param {UserEntity} [overrides] - Indicates the user data that can be overridden
+ * @param {any} [overrides] - Indicates the user data that can be overridden
  * @return {UserEntity} - The returned user's data
  */
-export const userFactoryStub = (overrides?: UserEntity): UserEntity => {
+export const userFactoryStub = (overrides?: any): UserEntity => {
   return {
     _id: new ObjectId(),
     email: faker.internet.email(),

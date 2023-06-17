@@ -5,7 +5,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { userFactoryStub } from '../../factory/stubs/user.stub';
 
-describe('Auth Service', () => {
+describe('User Service', () => {
   let userService: UserService;
   let userRepo: UserRepository;
   const response = {
