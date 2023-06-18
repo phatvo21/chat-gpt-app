@@ -1,5 +1,5 @@
-import { JWT_KEY, JWT_TTL } from '@app/chat-api/core/auth/constants';
-import { UserModule } from '@app/chat-api/user/user.module';
+import { JWT_KEY, JWT_TTL } from '@app/chat-api/modules/core/auth/constants';
+import { UserModule } from '@app/chat-api/modules/user/user.module';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';

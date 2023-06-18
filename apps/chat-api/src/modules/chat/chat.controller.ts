@@ -1,9 +1,9 @@
-import { ChatService } from '@app/chat-api/chat/chat.service';
-import { ChatDto } from '@app/chat-api/chat/dtos/chat.dto';
-import { ChatResponseDto } from '@app/chat-api/chat/dtos/chat-response.dto';
-import { ChatEntity } from '@app/chat-api/chat/schema/chat.schema';
 import { ConversationEnum } from '@app/chat-api/consts/conversation.enum';
-import { JwtAuthGuard } from '@app/chat-api/core/auth/strategies/jwt.strategy';
+import { ChatService } from '@app/chat-api/modules/chat/chat.service';
+import { ChatDto } from '@app/chat-api/modules/chat/dtos/chat.dto';
+import { ChatResponseDto } from '@app/chat-api/modules/chat/dtos/chat-response.dto';
+import { ChatEntity } from '@app/chat-api/modules/chat/schema/chat.schema';
+import { JwtAuthGuard } from '@app/chat-api/modules/core/auth/strategies/jwt.strategy';
 import { AuthCreateEndpoint } from '@app/common/decorators/auth-create-endpoint.decorator';
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 

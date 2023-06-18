@@ -1,7 +1,7 @@
-import { AuthOutputDto } from '@app/chat-api/auth/dtos/auth-output.dto';
-import { RegisterDto } from '@app/chat-api/auth/dtos/register.dto';
-import { TokensManager } from '@app/chat-api/core/auth/tokens.manager';
-import { UserService } from '@app/chat-api/user/userService';
+import { AuthOutputDto } from '@app/chat-api/modules/auth/dtos/auth-output.dto';
+import { RegisterDto } from '@app/chat-api/modules/auth/dtos/register.dto';
+import { TokensManager } from '@app/chat-api/modules/core/auth/tokens.manager';
+import { UserService } from '@app/chat-api/modules/user/userService';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

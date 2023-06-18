@@ -1,5 +1,5 @@
-import { TokensManager } from '@app/chat-api/core/auth/tokens.manager';
-import { UserService } from '@app/chat-api/user/userService';
+import { TokensManager } from '@app/chat-api/modules/core/auth/tokens.manager';
+import { UserService } from '@app/chat-api/modules/user/userService';
 import { createMock } from '@golevelup/ts-jest';
 import { JwtService } from '@nestjs/jwt';
 

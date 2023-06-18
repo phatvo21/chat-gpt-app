@@ -1,6 +1,6 @@
-import { AuthOutputDto } from '@app/chat-api/auth/dtos/auth-output.dto';
-import { UserEntity } from '@app/chat-api/user/schema/user.schema';
-import { UserService } from '@app/chat-api/user/userService';
+import { AuthOutputDto } from '@app/chat-api/modules/auth/dtos/auth-output.dto';
+import { UserEntity } from '@app/chat-api/modules/user/schema/user.schema';
+import { UserService } from '@app/chat-api/modules/user/userService';
 import { Injectable } from '@nestjs/common';
 
 import { PasswordUtil } from '../utils/password.util';

@@ -1,18 +1,31 @@
-import { UserRepository } from '@app/chat-api/user/repository/user.repository';
-import { UserService } from '@app/chat-api/user/userService';
+import { ChatRepository } from '@app/chat-api/modules/chat/repository/chat.repository';
+import { UserRepository } from '@app/chat-api/modules/user/repository/user.repository';
+import { UserService } from '@app/chat-api/modules/user/userService';
 import { faker } from '@faker-js/faker';
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { chatFactoryStub } from '../../factory/stubs/chat-history.stub';
 import { userFactoryStub } from '../../factory/stubs/user.stub';
 
 describe('User Service', () => {
   let userService: UserService;
   let userRepo: UserRepository;
+  let chatRepo: ChatRepository;
   const response = {
     token: faker.lorem.word(),
     refreshToken: faker.lorem.word(),
   };
   const user = userFactoryStub();
+  const chatHistory = chatFactoryStub();
+  const chatHistoryReponseData = {
+    data: chatHistory.conversations,
+    total: 10,
+    currentPage: 1,
+    size: 1,
+    lastPage: null,
+    nextPage: null,
+    prevPage: null,
+  };
 
   beforeEach(async () => {
     const UserRepositoryProvider = {
@@ -45,12 +58,22 @@ describe('User Service', () => {
       }),
     };
 
+    const ChatRepositoryProvider = {
+      provide: ChatRepository,
+      useFactory: () => ({
+        findChatByUserId: jest.fn(() => {
+          return chatHistoryReponseData;
+        }),
+      }),
+    };
+
     const app: TestingModule = await Test.createTestingModule({
-      providers: [UserRepository, UserRepositoryProvider],
+      providers: [UserRepository, UserRepositoryProvider, ChatRepository, ChatRepositoryProvider],
     }).compile();
 
     userRepo = app.get<UserRepository>(UserRepository);
-    userService = new UserService(userRepo);
+    chatRepo = app.get<ChatRepository>(ChatRepository);
+    userService = new UserService(userRepo, chatRepo);
   });
 
   it('should set the token for a given user', async () => {

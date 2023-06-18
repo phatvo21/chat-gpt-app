@@ -1,7 +1,7 @@
-import { AuthManager } from '@app/chat-api/core/auth/auth.manager';
-import { TokensManager } from '@app/chat-api/core/auth/tokens.manager';
-import { PasswordUtil } from '@app/chat-api/core/utils/password.util';
-import { UserService } from '@app/chat-api/user/userService';
+import { AuthManager } from '@app/chat-api/modules/core/auth/auth.manager';
+import { TokensManager } from '@app/chat-api/modules/core/auth/tokens.manager';
+import { PasswordUtil } from '@app/chat-api/modules/core/utils/password.util';
+import { UserService } from '@app/chat-api/modules/user/userService';
 import { createMock } from '@golevelup/ts-jest';
 
 describe('Core/Auth/AuthManager', () => {

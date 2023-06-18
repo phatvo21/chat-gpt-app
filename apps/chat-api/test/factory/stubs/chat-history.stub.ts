@@ -1,5 +1,5 @@
-import { ChatEntity } from '@app/chat-api/chat/schema/chat.schema';
 import { ConversationEnum } from '@app/chat-api/consts/conversation.enum';
+import { ChatEntity } from '@app/chat-api/modules/chat/schema/chat.schema';
 import { faker } from '@faker-js/faker';
 import { ObjectId } from 'mongodb';
 

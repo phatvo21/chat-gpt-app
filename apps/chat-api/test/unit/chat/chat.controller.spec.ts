@@ -1,6 +1,6 @@
-import { ChatController } from '@app/chat-api/chat/chat.controller';
-import { ChatService } from '@app/chat-api/chat/chat.service';
 import { ConversationEnum } from '@app/chat-api/consts/conversation.enum';
+import { ChatController } from '@app/chat-api/modules/chat/chat.controller';
+import { ChatService } from '@app/chat-api/modules/chat/chat.service';
 import { faker } from '@faker-js/faker';
 import { Test, TestingModule } from '@nestjs/testing';
 

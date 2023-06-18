@@ -1,5 +1,5 @@
-import { ChatService } from '@app/chat-api/chat/chat.service';
-import { ChatRepository } from '@app/chat-api/chat/repository/chat.repository';
+import { ChatService } from '@app/chat-api/modules/chat/chat.service';
+import { ChatRepository } from '@app/chat-api/modules/chat/repository/chat.repository';
 import { LangChain } from '@app/common/services/language-models/lang-chain';
 import { Test, TestingModule } from '@nestjs/testing';
 

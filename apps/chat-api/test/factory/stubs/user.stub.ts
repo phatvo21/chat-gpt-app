@@ -1,4 +1,4 @@
-import { UserEntity } from '@app/chat-api/user/schema/user.schema';
+import { UserEntity } from '@app/chat-api/modules/user/schema/user.schema';
 import { faker } from '@faker-js/faker';
 import { ObjectId } from 'mongodb';
 

@@ -1,7 +1,7 @@
-import { AuthModule } from '@app/chat-api/auth/auth.module';
-import { ChatModule } from '@app/chat-api/chat/chat.module';
-import { CoreModule } from '@app/chat-api/core/core.module';
-import { UserModule } from '@app/chat-api/user/user.module';
+import { AuthModule } from '@app/chat-api/modules/auth/auth.module';
+import { ChatModule } from '@app/chat-api/modules/chat/chat.module';
+import { CoreModule } from '@app/chat-api/modules/core/core.module';
+import { UserModule } from '@app/chat-api/modules/user/user.module';
 import { BaseModule } from '@app/common/modules/base.module';
 import { RateLimitModule } from '@app/common/modules/rate-limit.module';
 import { LangChain } from '@app/common/services/language-models/lang-chain';

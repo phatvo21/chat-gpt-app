@@ -17,7 +17,7 @@
     - [POST - /api/v1/public/auth/refresh](#post---apiv1publicauthrefresh)
     - [PATCH - /api/v1/change-password](#patch---apiv1change-password)
     - [POST - /api/v1/chat](#post---apiv1chat)
-    - [GET - /api/v1/user/chat-history](#get---apiv1userchat-history)
+    - [GET - /api/v1/users/chat-history](#get---apiv1userschat-history)
 - [Cache Mechanism](#cache-mechanism)
   - [Verification Email](#verification-email) 
   - [Password Change](#password-change)
@@ -353,7 +353,7 @@ Users can call this endpoint to interact with the LLMs
 ```
 ---
 
-### GET - /api/v1/user/chat-history
+### GET - /api/v1/users/chat-history
 
 > Auth Type: JWT
 
@@ -371,15 +371,22 @@ Users can call this endpoint to get all the chat history for a given user
 
 ```json
 {
-  "total": 1,
-  "size": 1,
-  "page": 1,
-  "chats": [
+  "conversations": [
     {
-      "message": "Hello! how are you?",
-      "response": "I'm doing well. Thanks!"
+      "message": "Hey bro, this is test 19",
+      "type": "user"
+    },
+    {
+      "message": "That is good mate Hey bro, this is test 20",
+      "type": "bot"
     }
-  ]
+  ],
+  "total": 2,
+  "currentPage": 1,
+  "size": 10,
+  "lastPage": null,
+  "nextPage": null,
+  "prevPage": null
 }
 ```
 ---

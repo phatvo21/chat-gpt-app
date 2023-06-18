@@ -1,9 +1,9 @@
-import { AuthOutputDto } from '@app/chat-api/auth/dtos/auth-output.dto';
-import { LoginDto } from '@app/chat-api/auth/dtos/login.dto';
-import { RegisterDto } from '@app/chat-api/auth/dtos/register.dto';
-import { AuthManager } from '@app/chat-api/core/auth/auth.manager';
-import { LocalAuthGuard } from '@app/chat-api/core/auth/strategies/local.strategy';
-import { UserEntity } from '@app/chat-api/user/schema/user.schema';
+import { AuthOutputDto } from '@app/chat-api/modules/auth/dtos/auth-output.dto';
+import { LoginDto } from '@app/chat-api/modules/auth/dtos/login.dto';
+import { RegisterDto } from '@app/chat-api/modules/auth/dtos/register.dto';
+import { AuthManager } from '@app/chat-api/modules/core/auth/auth.manager';
+import { LocalAuthGuard } from '@app/chat-api/modules/core/auth/strategies/local.strategy';
+import { UserEntity } from '@app/chat-api/modules/user/schema/user.schema';
 import { CreateEndpoint } from '@app/common/decorators/create-endpoint.decorator';
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 

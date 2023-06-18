@@ -1,5 +1,5 @@
-import { TokenExpiredException } from '@app/chat-api/core/auth/exceptions/token-expired.exception';
-import { JwtStrategy } from '@app/chat-api/core/auth/strategies/jwt.strategy';
+import { TokenExpiredException } from '@app/chat-api/modules/core/auth/exceptions/token-expired.exception';
+import { JwtStrategy } from '@app/chat-api/modules/core/auth/strategies/jwt.strategy';
 
 describe('Core/Auth/Strategies', () => {
   let strategy: JwtStrategy;

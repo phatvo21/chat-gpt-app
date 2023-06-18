@@ -1,6 +1,6 @@
 import { AppModule } from '@app/chat-api/app.module';
-import { PasswordUtil } from '@app/chat-api/core/utils/password.util';
-import { UserDocument, UserEntity } from '@app/chat-api/user/schema/user.schema';
+import { PasswordUtil } from '@app/chat-api/modules/core/utils/password.util';
+import { UserDocument, UserEntity } from '@app/chat-api/modules/user/schema/user.schema';
 import {
   generateMockServer,
   generateRequest,

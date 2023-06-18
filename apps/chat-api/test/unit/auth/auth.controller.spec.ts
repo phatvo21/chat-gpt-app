@@ -1,6 +1,6 @@
-import { AuthController } from '@app/chat-api/auth/auth.controller';
-import { AuthService } from '@app/chat-api/auth/auth.service';
-import { AuthManager } from '@app/chat-api/core/auth/auth.manager';
+import { AuthController } from '@app/chat-api/modules/auth/auth.controller';
+import { AuthService } from '@app/chat-api/modules/auth/auth.service';
+import { AuthManager } from '@app/chat-api/modules/core/auth/auth.manager';
 import { faker } from '@faker-js/faker';
 import { Test, TestingModule } from '@nestjs/testing';
 

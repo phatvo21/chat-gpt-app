@@ -1,12 +1,12 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional } from 'class-validator';
 
 export class BaseQuery {
-  @IsString()
-  @ApiPropertyOptional()
-  sortBy: string;
+  @IsOptional()
+  @ApiProperty({ example: 1 })
+  page: any;
 
-  @IsString()
-  @ApiPropertyOptional()
-  sortDirection: string;
+  @IsOptional()
+  @ApiProperty({ example: 20 })
+  size: any;
 }

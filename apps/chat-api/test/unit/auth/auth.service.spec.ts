@@ -1,6 +1,6 @@
-import { AuthService } from '@app/chat-api/auth/auth.service';
-import { TokensManager } from '@app/chat-api/core/auth/tokens.manager';
-import { UserService } from '@app/chat-api/user/userService';
+import { AuthService } from '@app/chat-api/modules/auth/auth.service';
+import { TokensManager } from '@app/chat-api/modules/core/auth/tokens.manager';
+import { UserService } from '@app/chat-api/modules/user/userService';
 import { faker } from '@faker-js/faker';
 import { Test, TestingModule } from '@nestjs/testing';
 

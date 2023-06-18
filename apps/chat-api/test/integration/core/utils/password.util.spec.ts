@@ -1,4 +1,4 @@
-import { PasswordUtil } from '@app/chat-api/core/utils/password.util';
+import { PasswordUtil } from '@app/chat-api/modules/core/utils/password.util';
 import bcrypt from 'bcrypt';
 
 describe('Core/Utils/PasswordUtils', () => {

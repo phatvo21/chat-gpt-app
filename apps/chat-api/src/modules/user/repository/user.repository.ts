@@ -1,5 +1,5 @@
-import { UserRepositoryInterface } from '@app/chat-api/user/repository/interface/user-repository.interface';
-import { UserDocument, UserEntity } from '@app/chat-api/user/schema/user.schema';
+import { UserRepositoryInterface } from '@app/chat-api/modules/user/repository/interface/user-repository.interface';
+import { UserDocument, UserEntity } from '@app/chat-api/modules/user/schema/user.schema';
 import { BaseRepository } from '@app/common/repositories/base.repository';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';

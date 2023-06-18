@@ -1,7 +1,7 @@
-import { JWT_KEY } from '@app/chat-api/core/auth/constants';
-import { UserToken } from '@app/chat-api/core/auth/tokens.manager';
-import { PasswordUtil } from '@app/chat-api/core/utils/password.util';
-import { UserEntity } from '@app/chat-api/user/schema/user.schema';
+import { JWT_KEY } from '@app/chat-api/modules/core/auth/constants';
+import { UserToken } from '@app/chat-api/modules/core/auth/tokens.manager';
+import { PasswordUtil } from '@app/chat-api/modules/core/utils/password.util';
+import { UserEntity } from '@app/chat-api/modules/user/schema/user.schema';
 import jwt from 'jsonwebtoken';
 
 export class GenerateAccessToken {

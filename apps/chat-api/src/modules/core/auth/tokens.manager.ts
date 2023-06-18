@@ -4,8 +4,8 @@ import { v4 as uuid } from 'uuid';
 
 import { REFRESH_TOKEN_TTL, REFRESH_TOKEN_TTL_LONG_LIVED } from './constants';
 import moment = require('moment');
-import { UserEntity } from '@app/chat-api/user/schema/user.schema';
-import { UserService } from '@app/chat-api/user/userService';
+import { UserEntity } from '@app/chat-api/modules/user/schema/user.schema';
+import { UserService } from '@app/chat-api/modules/user/userService';
 
 export interface UserToken {
   user: string;

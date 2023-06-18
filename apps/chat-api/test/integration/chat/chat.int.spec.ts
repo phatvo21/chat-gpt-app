@@ -1,7 +1,7 @@
 import { AppModule } from '@app/chat-api/app.module';
-import { ChatDocument, ChatEntity } from '@app/chat-api/chat/schema/chat.schema';
 import { ConversationEnum } from '@app/chat-api/consts/conversation.enum';
-import { UserDocument, UserEntity } from '@app/chat-api/user/schema/user.schema';
+import { ChatDocument, ChatEntity } from '@app/chat-api/modules/chat/schema/chat.schema';
+import { UserDocument, UserEntity } from '@app/chat-api/modules/user/schema/user.schema';
 import {
   generateMockServer,
   generateRequest,

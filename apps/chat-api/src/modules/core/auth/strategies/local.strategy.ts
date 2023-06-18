@@ -1,4 +1,4 @@
-import { UserEntity } from '@app/chat-api/user/schema/user.schema';
+import { UserEntity } from '@app/chat-api/modules/user/schema/user.schema';
 import { Injectable } from '@nestjs/common';
 import { AuthGuard, PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
