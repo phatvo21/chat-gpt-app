@@ -1,3 +1,5 @@
+import { isString } from 'lodash';
+
 export interface PaginateParams {
   page?: number;
   total?: number;
@@ -53,5 +55,9 @@ export const paginateTakeSkipCalculation = (params: PaginateParams): PaginateTak
   const page: number = params?.page ?? 1;
   const skip: number = (page - 1) * take;
 
-  return { take, skip, page };
+  return {
+    take: isString(take) ? parseInt(take, 10) : take,
+    skip: isString(skip) ? parseInt(skip, 10) : skip,
+    page: isString(page) ? parseInt(page, 10) : page,
+  };
 };

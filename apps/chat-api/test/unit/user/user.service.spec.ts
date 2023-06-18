@@ -17,7 +17,7 @@ describe('User Service', () => {
   };
   const user = userFactoryStub();
   const chatHistory = chatFactoryStub();
-  const chatHistoryReponseData = {
+  const chatHistoryResponseData = {
     data: chatHistory.conversations,
     total: 10,
     currentPage: 1,
@@ -62,7 +62,7 @@ describe('User Service', () => {
       provide: ChatRepository,
       useFactory: () => ({
         findChatByUserId: jest.fn(() => {
-          return chatHistoryReponseData;
+          return chatHistoryResponseData;
         }),
       }),
     };
@@ -117,5 +117,20 @@ describe('User Service', () => {
     expect(userRepo.create).toHaveBeenCalledTimes(1);
     expect(result.token.token).toBe(user.token.token);
     expect(result._id.toString()).toBe(user._id.toString());
+  });
+
+  it('should fetch the chat history for a given user', async () => {
+    const result = await userService.getChatHistory({
+      userId: user._id.toString(),
+    });
+
+    expect(chatRepo.findChatByUserId).toHaveBeenCalledTimes(1);
+    expect(chatRepo.findChatByUserId).toHaveBeenCalledWith({ userId: user._id.toString() });
+    expect(JSON.stringify(result.data)).toBe(JSON.stringify(chatHistoryResponseData.data));
+    expect(result.total).toBe(chatHistoryResponseData.total);
+    expect(result.currentPage).toBe(chatHistoryResponseData.currentPage);
+    expect(result.nextPage).toBe(chatHistoryResponseData.nextPage);
+    expect(result.lastPage).toBe(chatHistoryResponseData.lastPage);
+    expect(result.prevPage).toBe(chatHistoryResponseData.prevPage);
   });
 });
