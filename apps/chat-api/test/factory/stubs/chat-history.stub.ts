@@ -1,4 +1,5 @@
 import { ChatEntity } from '@app/chat-api/chat/schema/chat.schema';
+import { ConversationEnum } from '@app/chat-api/consts/conversation.enum';
 import { faker } from '@faker-js/faker';
 import { ObjectId } from 'mongodb';
 
@@ -10,7 +11,10 @@ import { ObjectId } from 'mongodb';
 export const chatFactoryStub = (overrides?: any): ChatEntity => {
   return {
     _id: new ObjectId(),
-    conversations: [{ message: faker.lorem.word(), response: faker.lorem.word() }],
+    conversations: [
+      { message: faker.lorem.word(), type: ConversationEnum.USER },
+      { message: faker.lorem.word(), type: ConversationEnum.BOT },
+    ],
     ...overrides,
   };
 };

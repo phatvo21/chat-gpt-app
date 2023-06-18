@@ -1,3 +1,4 @@
+import { ConversationEnum } from '@app/chat-api/consts/conversation.enum';
 import { BaseEntity } from '@app/common/schemas/base.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Type } from 'class-transformer';
@@ -10,8 +11,11 @@ export class Conversation {
   @Prop({ required: true })
   message: string;
 
-  @Prop({ required: true })
-  response: string;
+  @Prop({ required: true, enum: ConversationEnum })
+  type: ConversationEnum;
+
+  @Prop({ type: Date, default: new Date() })
+  createdAt: Date;
 }
 
 @Schema({
@@ -24,7 +28,7 @@ export class ChatEntity extends BaseEntity {
 
   @Type(() => Conversation)
   @Prop({ type: Conversation, _id: false, default: [] })
-  conversations?: Conversation[];
+  conversations: Conversation[];
 }
 
 export const ChatSchema = SchemaFactory.createForClass(ChatEntity);

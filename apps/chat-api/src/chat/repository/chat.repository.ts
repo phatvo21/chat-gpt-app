@@ -18,14 +18,16 @@ export class ChatRepository extends BaseRepository<ChatEntity> implements ChatRe
   }
 
   public async addOrUpdateHistoryChat(data: StoreChat): Promise<void> {
-    const { conversation, userId } = data;
+    const { conversations, userId } = data;
     const chatHistory = await this.chatModel.findOne({ userId });
 
     await (chatHistory
-      ? this.chatModel.findOneAndUpdate({ userId }, { $push: { conversations: conversation } }, { new: true }).exec()
+      ? this.chatModel
+          .findOneAndUpdate({ userId }, { $push: { conversations: { $each: conversations } } }, { new: true })
+          .exec()
       : this.chatModel.create({
           userId,
-          conversations: [conversation],
+          conversations,
         }));
   }
 }

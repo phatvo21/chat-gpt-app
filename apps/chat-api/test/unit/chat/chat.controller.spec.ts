@@ -1,5 +1,6 @@
 import { ChatController } from '@app/chat-api/chat/chat.controller';
 import { ChatService } from '@app/chat-api/chat/chat.service';
+import { ConversationEnum } from '@app/chat-api/consts/conversation.enum';
 import { faker } from '@faker-js/faker';
 import { Test, TestingModule } from '@nestjs/testing';
 
@@ -44,10 +45,16 @@ describe('Chat Controller', () => {
     expect(chatService.storeChatHistory).toHaveBeenCalledTimes(1);
     expect(chatService.storeChatHistory).toHaveBeenCalledWith({
       userId: req.user.user,
-      conversation: {
-        message: body.message,
-        response,
-      },
+      conversations: [
+        {
+          message: body.message,
+          type: ConversationEnum.USER,
+        },
+        {
+          message: response,
+          type: ConversationEnum.BOT,
+        },
+      ],
     });
     expect(response).toBe('Hello world!');
   });

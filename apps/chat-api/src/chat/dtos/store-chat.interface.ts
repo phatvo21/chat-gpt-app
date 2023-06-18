@@ -1,9 +1,11 @@
+import { ConversationEnum } from '@app/chat-api/consts/conversation.enum';
+
 export interface StoreChat {
   userId: string;
-  conversation: Conversation;
+  conversations: Conversation[];
 }
 
 export interface Conversation {
   message: string;
-  response: string;
+  type: ConversationEnum;
 }

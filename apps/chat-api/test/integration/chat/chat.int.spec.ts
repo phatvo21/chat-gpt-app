@@ -1,5 +1,6 @@
 import { AppModule } from '@app/chat-api/app.module';
 import { ChatDocument, ChatEntity } from '@app/chat-api/chat/schema/chat.schema';
+import { ConversationEnum } from '@app/chat-api/consts/conversation.enum';
 import { UserDocument, UserEntity } from '@app/chat-api/user/schema/user.schema';
 import {
   generateMockServer,
@@ -76,11 +77,15 @@ describe('Chat Integration', () => {
         });
 
       const { conversations } = await chatModel.findOne({ userId: generatedUser._id.toString() });
-      const isConversationAdded = conversations.some(
-        (con) => con.response === body.response && con.message === message,
+      const isUserMessageAdded = conversations.some(
+        (con) => con.message === message && con.type === ConversationEnum.USER,
+      );
+      const isBotMessageAdded = conversations.some(
+        (con) => con.message === body.response && con.type === ConversationEnum.BOT,
       );
 
-      expect(isConversationAdded).toBe(true);
+      expect(isUserMessageAdded).toBe(true);
+      expect(isBotMessageAdded).toBe(true);
       expect(body.response).not.toBeNull();
     });
   });

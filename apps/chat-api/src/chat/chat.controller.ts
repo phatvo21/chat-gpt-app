@@ -2,6 +2,7 @@ import { ChatService } from '@app/chat-api/chat/chat.service';
 import { ChatDto } from '@app/chat-api/chat/dtos/chat.dto';
 import { ChatResponseDto } from '@app/chat-api/chat/dtos/chat-response.dto';
 import { ChatEntity } from '@app/chat-api/chat/schema/chat.schema';
+import { ConversationEnum } from '@app/chat-api/consts/conversation.enum';
 import { JwtAuthGuard } from '@app/chat-api/core/auth/strategies/jwt.strategy';
 import { AuthCreateEndpoint } from '@app/common/decorators/auth-create-endpoint.decorator';
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
@@ -23,13 +24,16 @@ export class ChatController {
       user: { user },
     } = req;
 
-    // Send the user's message to LLMs
+    // Send the user's message to LLMs and receive the response
     const response = await this.chatService.getMessageResponse(body);
 
-    // Add the current conversation to chat history
+    // Add the current conversations to the chat history
     await this.chatService.storeChatHistory({
       userId: user,
-      conversation: { message: body.message, response },
+      conversations: [
+        { message: body.message, type: ConversationEnum.USER },
+        { message: response, type: ConversationEnum.BOT },
+      ],
     });
 
     return { response };

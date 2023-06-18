@@ -41,23 +41,28 @@ MongoDB database serves as a storage in the application (MongoDB required).
 | password      | string                 | The hash characteristic string using bcrypt to store the user's password under the security method | required                 | *         |
 | emailVerified | boolean                | Flag indicating if the user's email is verified                                                    | required (default false) |           |
 | token         | [Token Object](#token) | Store the refresh token for long live logged in                                                    | optional                 |           |
+| createdAt     | date                   | Timestamp indicates when user created (Auto generated)                                             | required                 |           |
+| updatedAt     | date                   | Timestamp indicates when user updated (Auto generated)                                             | required                 |           |
 
 ### Chat Histories
 - Collection name: chatHistories
 
-| Column        | Type                                | Description                                           | Attributes               | Sensitive |
-|---------------|-------------------------------------|-------------------------------------------------------|--------------------------|-----------|
-| _id           | string                              | Automatically generated unique ID of the chat history | required (unique)        |           |
-| userId        | string                              | ID of the user reference on Users collection          | required (unique)        |           |
-| conversations | [Conversation Array](#conversation) | All the conversations of an given user                | required                 |           |
+| Column        | Type                                | Description                                            | Attributes               | Sensitive |
+|---------------|-------------------------------------|--------------------------------------------------------|--------------------------|-----------|
+| _id           | string                              | Automatically generated unique ID of the chat history  | required (unique)        |           |
+| userId        | string                              | ID of the user reference on Users collection           | required (unique)        |           |
+| conversations | [Conversation Array](#conversation) | All the conversations of an given user                 | required                 |           |
+| createdAt     | date                                | Timestamp indicates when chat created (Auto generated) | required                 |           |
+| updatedAt     | date                                | Timestamp indicates when chat updated (Auto generated) | required                 |           |
 
 ### Sub Collections
 #### Conversation
 
-| Column   | Type   | Description                                           | Attributes         | Sensitive |
-|----------|--------|-------------------------------------------------------|--------------------|-----------|
-| message  | string | Message of the user who sent that out                 | required           |           |
-| response | string | Response of the LLMs to a specific message            | required           |           |
+| Column    | Type                 | Description                                                    | Attributes         | Sensitive |
+|-----------|----------------------|----------------------------------------------------------------|--------------------|-----------|
+| message   | string               | Message of the user who sent that out                          | required           |           |
+| type      | enum['user', 'bot']  | Indicates that the user send message or bot send response      | required           |           |
+| createdAt | date                 | Timestamp indicates when conversation created (Auto generated) | required           |           |
 
 #### Token
 

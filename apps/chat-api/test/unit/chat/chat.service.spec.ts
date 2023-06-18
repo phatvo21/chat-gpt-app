@@ -42,7 +42,7 @@ describe('Chat Service', () => {
   });
 
   it('should push the current conversation to list chat history', async () => {
-    const data = { userId: userData._id.toString(), conversation: chatData.conversations[0] };
+    const data = { userId: userData._id.toString(), conversations: chatData.conversations };
 
     await chatService.storeChatHistory(data);
     expect(chatRepo.addOrUpdateHistoryChat).toHaveBeenCalledTimes(1);
