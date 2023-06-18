@@ -7,7 +7,6 @@ import appConfig from '../config/app.config';
   imports: [
     ConfigModule.forRoot({
       envFilePath: `apps/${process.env.SERVICE_NAME}/.env`,
-      ignoreEnvFile: process.env.NODE_ENV === 'production',
       isGlobal: true,
       load: [appConfig],
       cache: true,

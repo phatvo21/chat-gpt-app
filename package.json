@@ -18,10 +18,8 @@
     "start:chat-api": "cross-env SERVICE_NAME=chat-api nest start chat-api",
     "start:chat-api:dev": "npm run start:chat-api --watch",
     "start:chat-api:prod": "node dist/apps/chat-api/main",
-    "db:restore": "docker-compose exec mongo sh database/restore.sh",
-    "test:e2e": "jest --runInBand --forceExit",
     "test": "jest",
-    "start:prod:compose": "docker-compose up --abort-on-container-exit --build",
+    "start:prod:compose": "docker-compose up --abort-on-container-exit --build -d",
     "test:compose": "docker-compose -f ./docker-compose.testing.yaml up --remove-orphans --force-recreate --build -d && npm run test"
   },
   "husky": {

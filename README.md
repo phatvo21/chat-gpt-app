@@ -1,37 +1,122 @@
 # Service serves chat apis that allows users interact with LLMs.
 
 - [Introduction](#introduction)
-- [Database](#database)
-  - [Users](#users)  
-  - [Chat Histories](#chat-histories)
-  - [Sub Collections](#sub-collections)
-    - [Conversation](#conversation)
-    - [Token](#token)
-- [API Endpoints](#api-endpoints)
-    - [POST - /api/v1/public/auth/registration](#post---apiv1publicauthregistration)
-    - [POST - /api/v1/public/auth/login](#post---apiv1publicauthlogin)
-    - [POST - /api/v1/public/auth/resend-email](#post---apiv1publicauthresend-email)
-    - [POST - /api/v1/public/auth/verify-email](#post---apiv1publicauthverify-email)
-    - [POST - /api/v1/public/auth/forgot-password](#post---apiv1publicauthforgot-password)
-    - [POST - /api/v1/public/auth/reset-password](#post---apiv1publicauthreset-password)
-    - [POST - /api/v1/public/auth/refresh](#post---apiv1publicauthrefresh)
-    - [PATCH - /api/v1/change-password](#patch---apiv1change-password)
-    - [POST - /api/v1/chat](#post---apiv1chat)
-    - [GET - /api/v1/users/chat-history](#get---apiv1userschat-history)
-- [Cache Mechanism](#cache-mechanism)
-  - [Verification Email](#verification-email) 
-  - [Password Change](#password-change)
-- [Send Email](#send-email)
-  - [Send Verification/Password Change Email](#send-verificationpassword-change-email)
-  - [Send Register Attempt Email](#send-register-attempt-email)
+- [Install](#install)
+  - [Setup Environment](#setup-environment)
+    - [Installation](#installation)
+    - [Environment Configuration](#environment-configuration)
+    - [Start Database](#start-database)
+- [Commands](#commands)
+- [Documents](#documents)
+- [API Document](#api-document)
+- [Technical Specification](#technical-specification)
+  - [Database](#database)
+    - [Users](#users)  
+    - [Chat Histories](#chat-histories)
+    - [Sub Collections](#sub-collections)
+      - [Conversation](#conversation)
+      - [Token](#token)
+  - [API Endpoints](#api-endpoints)
+      - [POST - /api/v1/public/auth/registration](#post---apiv1publicauthregistration)
+      - [POST - /api/v1/public/auth/login](#post---apiv1publicauthlogin)
+      - [POST - /api/v1/public/auth/resend-email](#post---apiv1publicauthresend-email)
+      - [POST - /api/v1/public/auth/verify-email](#post---apiv1publicauthverify-email)
+      - [POST - /api/v1/public/auth/forgot-password](#post---apiv1publicauthforgot-password)
+      - [POST - /api/v1/public/auth/reset-password](#post---apiv1publicauthreset-password)
+      - [POST - /api/v1/public/auth/refresh](#post---apiv1publicauthrefresh)
+      - [PATCH - /api/v1/change-password](#patch---apiv1change-password)
+      - [POST - /api/v1/chat](#post---apiv1chat)
+      - [GET - /api/v1/users/chat-history](#get---apiv1userschat-history)
+  - [Cache Mechanism](#cache-mechanism)
+    - [Verification Email](#verification-email) 
+    - [Password Change](#password-change)
+  - [Send Email](#send-email)
+    - [Send Verification/Password Change Email](#send-verificationpassword-change-email)
+    - [Send Register Attempt Email](#send-register-attempt-email)
 
 ## Introduction
 Service serves chat apis that allows users interact with LLMs.
 
-## Database
+## Install
+
+### Setup Environment
+
+#### Installation
+
+Before starting to explore this application. You have to make sure your machine has a Node version >= 16.
+
+- `Node verion >= 16` (Required)
+- `Docker client` (Required)
+- Run the command `npm i` to install all the dependencies of this application.
+
+Following `apps/chat-api/.env.example` file, you have to create a new copy file called `apps/chat-api/.env`. This is where the environments variables are situated. The following variables below must be declared in the `.env` file.
+
+#### Environment Configuration
+
+- `NODE_ENV=development or NODE_ENV=production` (The running environment of the application)
+- `APP_PORT=4005` (The running port of the application)
+- `APP_HOST=0.0.0.0` (The address where hosted application)
+- `THROTTLE_TTL=60` (Rate limit time)
+- `THROTTLE_LIMIT=10` (Rate limit request count)
+- `JWT_KEY=thisislongjwtkeyconfiguration` (Secret key where used to identify the authentication)
+- `REFRESH_TOKEN_TTL_LONG_LIVED` (Long-live for the refresh token)
+- `REFRESH_TOKEN_TTL` (Expires time given in seconds for the refresh token)
+- `JWT_TTL` (Expires time given in seconds for the access token)
+- `OPEN_API_KEY` (API Key that obtained from ChatGPT)
+- `DATABASE_URL=mongodb://mongo:mongo@localhost:27017/chat-api?authSource=admin` (The string hold all database's credentials)
+
+#### Start Database
+We can start the database using docker
+
+```bash
+$ docker-compose up -d mongo
+```
+
+## Commands
+
+By using the following commands you will make the application work in the proper way.
+
+```bash
+# format the code styles
+$ npm run format
+
+# lint, checking the coding rules
+$ npm run lint
+
+# lint, fix violents coding rules
+$ npm run lint:fix
+
+# build chat-api application
+$ npm run build:chat-api
+
+# run both unit test and integration testing
+$ npm run test
+
+# start the application using Docker development
+$ docker-compose up
+
+# force the application running with Docker in the background
+$ docker-compose up -d
+
+# development
+$ npm run start:chat-api:dev
+
+# production mode
+$ npm run start:chat-api:prod
+```
+
+## Documents
+
+### API Document
+
+After starting the command `npm run start:chat-api:dev` or `npm run start:chat-api:prod`, you can land on API document page which is`http://${url}:${port}/ws-chat-api/documents` and all documents for the implemented endpoints are situated there.
+
+## Technical Specification
+
+### Database
 MongoDB database serves as a storage in the application (MongoDB required).
 
-### Users
+#### Users
 - Collection name: users
 
 | Column        | Type                   | Description                                                                                        | Attributes               | Sensitive |
@@ -44,7 +129,7 @@ MongoDB database serves as a storage in the application (MongoDB required).
 | createdAt     | date                   | Timestamp indicates when user created (Auto generated)                                             | required                 |           |
 | updatedAt     | date                   | Timestamp indicates when user updated (Auto generated)                                             | required                 |           |
 
-### Chat Histories
+#### Chat Histories
 - Collection name: chatHistories
 
 | Column        | Type                                | Description                                            | Attributes               | Sensitive |
@@ -55,8 +140,8 @@ MongoDB database serves as a storage in the application (MongoDB required).
 | createdAt     | date                                | Timestamp indicates when chat created (Auto generated) | required                 |           |
 | updatedAt     | date                                | Timestamp indicates when chat updated (Auto generated) | required                 |           |
 
-### Sub Collections
-#### Conversation
+#### Sub Collections
+##### Conversation
 
 | Column    | Type                 | Description                                                    | Attributes         | Sensitive |
 |-----------|----------------------|----------------------------------------------------------------|--------------------|-----------|
@@ -64,16 +149,16 @@ MongoDB database serves as a storage in the application (MongoDB required).
 | type      | enum['user', 'bot']  | Indicates that the user send message or bot send response      | required           |           |
 | createdAt | date                 | Timestamp indicates when conversation created (Auto generated) | required           |           |
 
-#### Token
+##### Token
 
 | Column    | Type   | Description                                           | Attributes         | Sensitive |
 |-----------|--------|-------------------------------------------------------|--------------------|-----------|
 | token     | string | The generated token                                   | required           |           |
 | expiredAt | string | Time that token expired                               | required           |           |
 
-## API Endpoints
+### API Endpoints
 
-### POST - /api/v1/public/auth/registration
+#### POST - /api/v1/public/auth/registration
 
 > Auth Type: NONE
 
@@ -110,7 +195,7 @@ Users will call this endpoint to register themselves
 ```
 ---
 
-### POST - /api/v1/public/auth/login
+#### POST - /api/v1/public/auth/login
 
 > Auth Type: NONE
 
@@ -143,7 +228,7 @@ Credentials based login
 ```
 ---
 
-### POST - /api/v1/public/auth/resend-email
+#### POST - /api/v1/public/auth/resend-email
 
 > Auth Type: NONE
 
@@ -172,7 +257,7 @@ Users can call this endpoint to initiate the email verification flow
 ```
 ---
 
-### POST - /api/v1/public/auth/verify-email
+#### POST - /api/v1/public/auth/verify-email
 
 > Auth Type: NONE
 
@@ -202,7 +287,7 @@ Users can call this endpoint to verify their email using the email verification 
 ```
 ---
 
-### POST - /api/v1/public/auth/forgot-password
+#### POST - /api/v1/public/auth/forgot-password
 
 > Auth Type: NONE
 
@@ -231,7 +316,7 @@ Users can call this endpoint to initiate the reset password flow
 ```
 ---
 
-### POST - /api/v1/public/auth/reset-password
+#### POST - /api/v1/public/auth/reset-password
 
 > Auth Type: NONE
 
@@ -262,7 +347,7 @@ Users can call this endpoint to change their passwords using the password reset 
 ```
 ---
 
-### POST - /api/v1/public/auth/refresh
+#### POST - /api/v1/public/auth/refresh
 
 > Auth Type: NONE
 
@@ -292,7 +377,7 @@ Refresh a user's access token
 ---
 
 
-### PATCH - /api/v1/change-password
+#### PATCH - /api/v1/change-password
 
 > Auth Type: JWT
 
@@ -324,7 +409,7 @@ Users can call this endpoint to change their passwords
 ```
 ---
 
-### POST - /api/v1/chat
+#### POST - /api/v1/chat
 
 > Auth Type: JWT
 
@@ -353,11 +438,17 @@ Users can call this endpoint to interact with the LLMs
 ```
 ---
 
-### GET - /api/v1/users/chat-history
+#### GET - /api/v1/users/chat-history
 
 > Auth Type: JWT
 
 Users can call this endpoint to get all the chat history for a given user
+
+#### Request Query<!-- omit in toc -->
+| Property | Type   | Description                                   | Specificity  |
+|----------|--------|-----------------------------------------------|--------------|
+| page     | number | Page where client want to fetch (Example: 1)  | **optional** |
+| size     | number | Size where client want to fetch (Example: 10) | **optional** |
 
 #### Checks<!-- omit in toc -->
 - User must be authenticated
@@ -392,31 +483,31 @@ Users can call this endpoint to get all the chat history for a given user
 ---
 
 
-## Cache Mechanism
+### Cache Mechanism
 We use Redis to cache the information that don't need to touch in DB. The Redis should follow standard methods, commands from the [docs](https://redis.io/docs/)
 
-### Verification Email
+#### Verification Email
 
 | Key                        | Type   | Value                | Expires time | Redis Method                                    |
 |----------------------------|--------|----------------------|--------------|-------------------------------------------------|
 | `emailVerification:$token` | string | Id of the given user | 5 minutes    | [Use Redis Set](https://redis.io/commands/set/) |
 
-### Password Change
+#### Password Change
 
 | Key                       | Type   | Value                | Expires time | Redis Method                                    |
 |---------------------------|--------|----------------------|--------------|-------------------------------------------------|
 | `passwordChange:$token`   | string | Id of the given user | 5 minutes    | [Use Redis Set](https://redis.io/commands/set/) |
 
-## Send Email
+### Send Email
 There is a mail service will serve to send email purposes
 
-### Send Verification/Password Change Email
+#### Send Verification/Password Change Email
 
 | Content | Type   | Value                            |
 |---------|--------|----------------------------------|
 | Token   | string | A random token generated by uuid |
 
-### Send Register Attempt Email
+#### Send Register Attempt Email
 
 | Content                                         | Type   |
 |-------------------------------------------------|--------|

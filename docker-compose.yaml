@@ -25,10 +25,18 @@ services:
         - COMMIT_HASH=COMMIT_HASH
       dockerfile: ./apps/chat-api/dockerfile
     environment:
-      APP_PORT: 3000
+      APP_PORT: 4000
       NODE_ENV: production
-      DATABASE_URL: mongodb://mongo:mongo@mongo/chat-api?authSource=admin
+      APP_HOST: 0.0.0.0
+      DATABASE_URL: mongodb://mongo:mongo@mongo:27017/chat-api?authSource=admin
+      THROTTLE_TTL: 60
+      THROTTLE_LIMIT: 10
+      JWT_KEY: thisislongjwtkeyconfiguration
+      REFRESH_TOKEN_TTL_LONG_LIVED: 2_592_000
+      REFRESH_TOKEN_TTL: 86_400
+      JWT_TTL: 900
+      OPEN_API_KEY: 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
     ports:
-      - 4000:3000
+      - 4005:4000
     depends_on:
       - mongo
