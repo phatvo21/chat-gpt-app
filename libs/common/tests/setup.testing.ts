@@ -19,6 +19,6 @@ process.env.REFRESH_TOKEN_TTL_LONG_LIVED = process.env.REFRESH_TOKEN_TTL_LONG_LI
 process.env.REFRESH_TOKEN_TTL = process.env.REFRESH_TOKEN_TTL ?? '86_400';
 process.env.JWT_TTL = process.env.JWT_TTL ?? '50000';
 
-process.env.OPEN_API_KEY = process.env.OPEN_API_KEY ?? '';
+process.env.OPEN_API_KEY = process.env.OPEN_API_KEY ?? process.env.OPEN_API_TESTING_KEY;
 
 jest.setTimeout(60_000);
