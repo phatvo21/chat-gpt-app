@@ -11,7 +11,7 @@ export class ChatService {
     private readonly chatRepo: ChatRepositoryInterface,
   ) {}
 
-  public getMessageResponse(data: ChatDto): Promise<any> {
+  public getMessageResponse(data: ChatDto): Promise<string> {
     const { message } = data;
     return LangChain.chat(message);
   }
