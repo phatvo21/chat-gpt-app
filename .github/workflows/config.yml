@@ -25,6 +25,22 @@ jobs:
       - name: Install dependencies
         run: npm i
 
+      - name: Create env file
+        run: |
+          touch .env
+          echo NODE_ENV=development >> .env
+          echo APP_PORT=4005 >> .env
+          echo APP_HOST=0.0.0.0 >> .env
+          echo DATABASE_URL=mongodb://mongo:mongo@localhost:27017/chat-api?authSource=admin >> .env
+          echo THROTTLE_TTL=60 >> .env
+          echo THROTTLE_LIMIT=10 >> .env
+          echo JWT_KEY=thisislongjwtkeyconfiguration >> .env
+          echo REFRESH_TOKEN_TTL_LONG_LIVED=2_592_000 >> .env
+          echo REFRESH_TOKEN_TTL=86_400 >> .env
+          echo JWT_TTL=900 >> .env
+          echo OPEN_API_KEY=${{ secrets.OPEN_API_KEY }} >> .env
+          cat .env  
+
       - name: Run lint
         run: npm run lint
 

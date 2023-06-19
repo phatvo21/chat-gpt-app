@@ -1,7 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { BaseChatModel } from 'langchain/chat_models';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
-// import { BaseChatMessage, HumanChatMessage } from 'langchain/schema';
+import { HumanChatMessage } from 'langchain/schema';
 
 @Module({})
 export class LangChain {
@@ -19,9 +19,8 @@ export class LangChain {
     };
   }
 
-  // TODO: Since the ChatGPT API Key is required to be paid, so need to have a valid key to send the message
-  public static async chat(message: string): Promise<any> {
-    return `That is good mate ${message}`;
-    // await this.model.call([new HumanChatMessage(message)]);
+  public static async chat(message: string): Promise<string> {
+    const { text } = await this.model.call([new HumanChatMessage(message)]);
+    return text;
   }
 }

@@ -82,6 +82,7 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
     "eslint": "^8.0.1",
     "eslint-config-adjunct": "^4.12.2",
     "eslint-config-airbnb-typescript": "^17.0.0",
