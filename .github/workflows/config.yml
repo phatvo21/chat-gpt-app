@@ -20,18 +20,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Install dependencies
         run: npm i
 
       - name: Create env file
-        with:
-          working-directory: ./apps/chat-api
         run: |
-          run: cp .env.example .env
+          cd ./apps/chat-api
+          cp .env.example .env
           echo OPEN_API_KEY=${{ secrets.OPEN_API_KEY }} >> .env
-          cat .env  
+          cat .env
+          cd ../..
 
       - name: Run lint
         run: npm run lint
