@@ -27,10 +27,14 @@ jobs:
 
       - name: Create env file
         run: |
-          working-directory: ./apps/chat-api
+          run: cd apps/chat-api
           run: cp .env.example .env
           echo OPEN_API_KEY=${{ secrets.OPEN_API_KEY }} >> .env
           cat .env  
+
+      - name: Main folder
+        run: |
+          run: cd ../..
 
       - name: Run lint
         run: npm run lint
